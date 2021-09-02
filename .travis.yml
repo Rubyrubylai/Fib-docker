@@ -20,3 +20,15 @@ after_success: # 測試成功後，build image
   - docker push ruru0403/fib-nginx
   - docker push ruru0403/fib-server
   - docker push ruru0403/fib-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-northeast-1"
+  app: "fib-docker"
+  env: "Fibdocker-env"
+  bucket_name: "elasticbeanstalk-ap-northeast-1-964218111192"
+  path: "fib-docker"
+  on:
+    branch: "master"
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
